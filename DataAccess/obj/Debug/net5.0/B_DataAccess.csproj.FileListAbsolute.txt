@@ -1,0 +1,5 @@
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.csproj.AssemblyReference.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.AssemblyInfoInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.AssemblyInfo.cs
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.csproj.CoreCompileInputs.cache

@@ -1,0 +1,5 @@
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Logic\obj\Debug\net5.0\C_Logic.csproj.AssemblyReference.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Logic\obj\Debug\net5.0\C_Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Logic\obj\Debug\net5.0\C_Logic.AssemblyInfoInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Logic\obj\Debug\net5.0\C_Logic.AssemblyInfo.cs
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Logic\obj\Debug\net5.0\C_Logic.csproj.CoreCompileInputs.cache

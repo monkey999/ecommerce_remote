@@ -1,0 +1,6 @@
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.AssemblyInfoInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.AssemblyInfo.cs
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.csproj.CoreCompileInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.csproj.AssemblyReference.cache

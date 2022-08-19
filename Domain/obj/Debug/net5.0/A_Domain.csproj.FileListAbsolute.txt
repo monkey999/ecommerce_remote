@@ -1,0 +1,15 @@
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\A_Domain.deps.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\A_Domain.runtimeconfig.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\A_Domain.runtimeconfig.dev.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\A_Domain.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\ref\A_Domain.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\bin\Debug\net5.0\A_Domain.pdb
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.AssemblyInfoInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.AssemblyInfo.cs
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.csproj.CoreCompileInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\ref\A_Domain.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.pdb
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.genruntimeconfig.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.csproj.AssemblyReference.cache
