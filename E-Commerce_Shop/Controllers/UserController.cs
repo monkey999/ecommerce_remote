@@ -18,9 +18,17 @@ namespace E_Commerce_Shop.Controllers
             _userService = userService;
         }
 
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<Domain.User> GetAll() => _userService.GetUsers();
+        [HttpGet(Name = "GetAllUsers")]
+        public IEnumerable<Domain.User> GetAll()
+        {
+            return _userService.GetUsers();
+        }
+
+        [HttpGet("{id}", Name = "GetUserById")]
+        public IActionResult GetUserById(int id)
+        {
+            if (_userService.)
+        }
 
         // POST api/<UserController>
         [HttpPost]
@@ -34,27 +42,22 @@ namespace E_Commerce_Shop.Controllers
                 Email = dto.Email,
                 Adress = dto.Adress
             });
-
         }
 
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
 
-        // GET api/<UserController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
 
-        // PUT api/<UserController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<UserController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 }

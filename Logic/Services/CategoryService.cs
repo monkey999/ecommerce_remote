@@ -13,7 +13,7 @@ namespace Logic.Services
             _categoryRepository = categoryRepository;
         }
 
-        public void CreateCategory(Category category) => _categoryRepository.Add(category);
+        public void CreateCategory(Category category) => _categoryRepository.AddAsync(category);
 
         public IEnumerable<Category> GetCategories() => _categoryRepository.FindAll();
     }

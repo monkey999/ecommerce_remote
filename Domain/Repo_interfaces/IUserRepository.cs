@@ -10,6 +10,6 @@ namespace Domain.Interfaces
     {
         Task<IEnumerable<User>> GetUsersByConditionAsync(Expression<Func<User, bool>> expression);
         Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> GetByIdUsersAsync(int id);
+        Task<User> GetUserByIdAsync(int id);
     }
 }

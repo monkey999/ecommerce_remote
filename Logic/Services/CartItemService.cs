@@ -18,7 +18,7 @@ namespace Logic.Services
             _uow = uow;
         }
 
-        public void CreateCartItem(CartItem cartItem) => _uow.CartItems.Add(cartItem);
+        public void CreateCartItem(CartItem cartItem) => _uow.CartItems.AddAsync(cartItem);
 
         public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync() => await _uow.CartItems.GetAllCartItemsAsync();
 

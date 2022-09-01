@@ -14,7 +14,7 @@ namespace Logic.Services
             _productRepository = productRepository;
         }
 
-        public void CreateProduct(Product product) => _productRepository.Add(product);
+        public void CreateProduct(Product product) => _productRepository.AddAsync(product);
 
         public IEnumerable<Product> GetProducts() => _productRepository.FindAll();
 

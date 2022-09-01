@@ -17,8 +17,7 @@ namespace Logic.Services
             _orderRepository = orderRepository;
         }
 
-
-        public void CreateOrder(Order order) => _orderRepository.Add(order);
+        public void CreateOrder(Order order) => _orderRepository.AddAsync(order);
 
         public IEnumerable<Order> GetOrders() => _orderRepository.FindAll();
 

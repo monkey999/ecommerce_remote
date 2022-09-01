@@ -18,7 +18,7 @@ namespace Logic.Services
         }
 
 
-        public void CreatePurchasedProduct(PurchasedProduct purchasedProduct) => _purchasedProductRepository.Add(purchasedProduct);
+        public void CreatePurchasedProduct(PurchasedProduct purchasedProduct) => _purchasedProductRepository.AddAsync(purchasedProduct);
 
         public IEnumerable<PurchasedProduct> GetPurchasedProducts() => _purchasedProductRepository.FindAll();
     }
