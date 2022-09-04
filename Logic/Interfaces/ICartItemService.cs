@@ -13,6 +13,5 @@ namespace Logic.Services
         Task<IEnumerable<CartItem>> GetAllCartItemsAsync();
         Task<CartItem> GetByIdCartItemsAsync(int id);
         Task<IEnumerable<CartItem>> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression);
-        Task SaveAsync();
     }
 }

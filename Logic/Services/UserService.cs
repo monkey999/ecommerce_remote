@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using Domain;
+using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Logic.Services
 {
     public class UserService : IUserService
     {
-        private readonly IGenericRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IGenericRepository<User> userRepository)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -22,13 +23,17 @@ namespace Logic.Services
             await _userRepository.AddAsync(user);
         }
 
-        public IEnumerable<User> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            return _userRepository.FindAll();
+            return await _userRepository.GetAllUsersAsync();
         }
         public IEnumerable<User> GetUserById(int id)
         {
-            return _userRepository.FindByCondition(x=>x.Id.Equals(id));
+            return _userRepository.FindByCondition(x => x.Id.Equals(id));
+        }
+        public void Update(User user)
+        {
+            _userRepository.Update(user);
         }
     }
 }

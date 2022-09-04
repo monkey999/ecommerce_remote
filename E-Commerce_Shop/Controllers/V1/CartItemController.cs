@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace E_Commerce_Shop.Controllers
+namespace E_Commerce_Shop.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,21 +20,21 @@ namespace E_Commerce_Shop.Controllers
             _cartItemService = cartItemService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddCartItem([FromBody] CreateCartItemDTO dto)
-        {
-            _cartItemService.CreateCartItem(new CartItem()
-            {
-                CartId = dto.CartId,
-                Quantity = dto.Quantity,
-                ProductId = dto.ProductId,
-                DateCreated = DateTime.Now,
-                BoughtStatus = dto.BoughtStatus
-            });
+        //[HttpPost]
+        //public async Task<IActionResult> AddCartItem([FromBody] CreateCartItemDTO dto)
+        //{
+        //    _cartItemService.CreateCartItem(new CartItem()
+        //    {
+        //        CartId = dto.CartId,
+        //        Quantity = dto.Quantity,
+        //        ProductId = dto.ProductId,
+        //        DateCreated = DateTime.Now,
+        //        BoughtStatus = dto.BoughtStatus
+        //    });
 
-            return Ok(await _cartItemService.
+        //    return Ok(await _cartItemService.
 
-        }
+        //}
 
 
         [HttpGet("GetAllCartItems")]
@@ -50,11 +50,11 @@ namespace E_Commerce_Shop.Controllers
             return Ok(await _cartItemService.GetByIdCartItemsAsync(id));
         }
 
-        [HttpGet("GetCartItemsByConditionAsync")]
-        public async Task<IActionResult> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression)
-        {
+        //[HttpGet("GetCartItemsByConditionAsync")]
+        //public async Task<IActionResult> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression)
+        //{
 
-        }
+        //}
 
         // PUT api/<CartItemController>/5
         //[HttpPut("{id}")]

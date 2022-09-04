@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 
 
-namespace E_Commerce_Shop.Controllers
+namespace E_Commerce_Shop.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
