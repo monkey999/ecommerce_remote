@@ -1,6 +1,7 @@
 ﻿using Domain;
 using E_Commerce_Shop.Contracts.V1;
-using E_Commerce_Shop.DTO;
+using E_Commerce_Shop.Contracts.V1.DTO_requests;
+using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -25,35 +26,38 @@ namespace E_Commerce_Shop.Controllers.V1
             return await _userService.GetUsers();
         }
 
-        [HttpGet("{id}", Name = "api/v1/GetUserById")]
-        public IActionResult GetUserById(int id)
+        [HttpGet(ApiRoutes.Users.GetUserByID)]
+        public IActionResult GetUserById([FromRoute] int userId)
         {
-            if (_userService.GetUserById(id) == null)
-            {
+            if (_userService.GetUserById(userId) == null)
                 return NotFound();
-            }
 
-            return Ok(_userService.GetUserById(id));
+            return Ok(_userService.GetUserById(userId));
         }
 
-        [HttpPost]
-        public IActionResult AddUser([FromBody] CreateUserDTO dto)
+        [HttpPost(ApiRoutes.Users.AddUser)]
+        public IActionResult AddUser([FromBody] CreateUserRequestDTO dto)
         {
-            if (dto == null)
-            {
-                return BadRequest();
-            }
-
-            _userService.CreateUser(new User()
+            var user = new User()
             {
                 Name = dto.Name,
                 Surname = dto.Surname,
                 PhoneNumber = dto.PhoneNumber,
                 Email = dto.Email,
                 Adress = dto.Adress
-            });
+            };
 
-            return CreatedAtRoute("api/v1/GetUserById", /*new { id = dto.Id },*/ dto);
+            _userService.CreateUser(user);
+
+            var response = new CreateUserResponseDTO()
+            {
+                Id = user.Id
+            };
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUri = baseUrl + "/" + ApiRoutes.Users.GetUserByID.Replace("{userId}", response.Id.ToString());
+            return Created(locationUri, response);
+            //return CreatedAtRoute("api/v1/GetUserById", new { id = dto.Id }, dto);
         }
 
         [HttpPut("{id}")]

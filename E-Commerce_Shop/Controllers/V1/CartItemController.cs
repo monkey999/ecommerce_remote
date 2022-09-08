@@ -1,10 +1,5 @@
-﻿using Domain;
-using E_Commerce_Shop.DTO;
-using Logic.Services;
+﻿using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1

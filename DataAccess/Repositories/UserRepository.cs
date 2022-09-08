@@ -15,24 +15,5 @@ namespace DataAccess.Repositories
         {
 
         }
-
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
-        {
-            return await FindAll()
-                            .OrderBy(u => u.Name)
-                                .ToListAsync();
-        }
-
-        public async Task<User> GetUserByIdAsync(int id)
-        {
-            return await FindByCondition(u => u.Id.Equals(id))
-                            .FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<User>> GetUsersByConditionAsync(Expression<Func<User, bool>> expression)
-        {
-            return await FindByCondition(expression)
-                            .ToListAsync();
-        }
     }
 }

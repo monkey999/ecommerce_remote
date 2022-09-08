@@ -13,9 +13,8 @@ namespace E_Commerce_Shop.Contracts.V1
         public static class Users
         {
             public const string GetAllUsers = Base + "/users";
-            //public static readonly string GetUserById = $"{Base}/{userId}";
-            //public static readonly string AddUser = $"{Base}/users";
-            //public static readonly string UpdateUser = $"{Base}/users";
+            public const string AddUser = Base + "/users";
+            public const string GetUserByID = Base + "/users/{userId}";
         }
     }
 }

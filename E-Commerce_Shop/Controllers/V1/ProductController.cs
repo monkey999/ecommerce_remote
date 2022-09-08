@@ -1,4 +1,4 @@
-﻿using E_Commerce_Shop.DTO;
+﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace E_Commerce_Shop.Controllers.V1
 
         // POST api/<ProductController>
         [HttpPost]
-        public void AddProduct([FromBody] CreateProductDTO dto)
+        public void AddProduct([FromBody] CreateProductRequestDTO dto)
         {
             _productService.CreateProduct(new Domain.Product()
             {

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace E_Commerce_Shop.DTO
+namespace E_Commerce_Shop.Contracts.V1.DTO_requests
 {
-    public class CreateCartItemDTO
+    public class CreateCartItemRequestDTO
     {
         public string CartId { get; set; }
         public int? Quantity { get; set; }

@@ -1,4 +1,5 @@
-﻿using E_Commerce_Shop.DTO;
+﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
+using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace E_Commerce_Shop.Controllers.V1
 
         // POST api/<CategoryController>
         [HttpPost]
-        public void AddCategory([FromBody] CreateCategoryDTO dto)
+        public void AddCategory([FromBody] CreateCategoryRequestDTO dto)
         {
             _categoryService.CreateCategory(new Domain.Category()
             {

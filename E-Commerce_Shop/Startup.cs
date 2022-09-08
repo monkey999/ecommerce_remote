@@ -1,13 +1,11 @@
-using DataAccess;
-using DataAccess.Repositories;
-using Domain;
-using Domain.Interfaces;
-using Logic.Services;
+using E_Commerce_Shop.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Linq;
 
 namespace E_Commerce_Shop
 {
@@ -23,7 +21,7 @@ namespace E_Commerce_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.InstallServicesInAssembly(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

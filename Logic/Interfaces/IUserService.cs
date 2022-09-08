@@ -8,7 +8,7 @@ namespace Logic.Services
     {
         Task CreateUser(User user);
         Task<IEnumerable<User>> GetUsers();
-        IEnumerable<User> GetUserById(int id);
+        Task<User> GetUserById(int id);
         void Update(User user);
     }
 }

@@ -1,4 +1,5 @@
-﻿using E_Commerce_Shop.DTO;
+﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
+using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,7 +27,7 @@ namespace E_Commerce_Shop.Controllers.V1
 
         // POST api/<PurchasedProductController>
         [HttpPost]
-        public void AddPurchasedProduct([FromBody] CreatePurchasedProductDTO dto)
+        public void AddPurchasedProduct([FromBody] CreatePurchasedProductRequestDTO dto)
         {
             _purchasedProductService.CreatePurchasedProduct(new Domain.PurchasedProduct()
             {

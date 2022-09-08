@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_Commerce_Shop.DTO
+namespace E_Commerce_Shop.Contracts.V1.DTO_responses
 {
-    public class CreateOrderDTO
+    public class CreateOrderResponseDTO
     {
         public int? CartItemId { get; set; }
         public int? UserId { get; set; }
