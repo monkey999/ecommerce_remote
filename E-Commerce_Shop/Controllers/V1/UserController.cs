@@ -21,33 +21,33 @@ namespace E_Commerce_Shop.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.Users.GetAllUsers)]
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IActionResult> GetAllUsers()
         {
-            return await _userService.GetUsers();
+            return Ok(await _userService.GetUsersAsync());
         }
 
         [HttpGet(ApiRoutes.Users.GetUserByID)]
-        public IActionResult GetUserById([FromRoute] int userId)
+        public async Task<IActionResult> GetUserById([FromRoute] int userId)
         {
-            if (_userService.GetUserById(userId) == null)
+            if (await _userService.GetUserByIdAsync(userId) == null)
                 return NotFound();
 
-            return Ok(_userService.GetUserById(userId));
+            return Ok(_userService.GetUserByIdAsync(userId));
         }
 
         [HttpPost(ApiRoutes.Users.AddUser)]
-        public IActionResult AddUser([FromBody] CreateUserRequestDTO dto)
+        public async Task<IActionResult> AddUser([FromBody] CreateUserRequestDTO request)
         {
             var user = new User()
             {
-                Name = dto.Name,
-                Surname = dto.Surname,
-                PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email,
-                Adress = dto.Adress
+                Name = request.Name,
+                Surname = request.Surname,
+                PhoneNumber = request.PhoneNumber,
+                Email = request.Email,
+                Adress = request.Adress
             };
 
-            _userService.CreateUser(user);
+            await _userService.CreateUserAsync(user);
 
             var response = new CreateUserResponseDTO()
             {
@@ -60,37 +60,36 @@ namespace E_Commerce_Shop.Controllers.V1
             //return CreatedAtRoute("api/v1/GetUserById", new { id = dto.Id }, dto);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] User updatedUser)
+        [HttpPut(ApiRoutes.Users.UpdateUser)]
+        public async Task<IActionResult> UpdateUser([FromRoute] int userId, [FromBody] UpdateUserRequestDTO request)
         {
-            if (updatedUser == null || updatedUser.Id != id)
+            var user = new User
             {
-                return BadRequest();
-            }
+                Id = userId,
+                Name = request.Name,
+                Surname = request.Surname,
+                PhoneNumber = request.PhoneNumber,
+                Email = request.Email,
+                Adress = request.Adress
+            };
 
-            var userToUpdate = _userService.GetUserById(id);
+            var updated = await _userService.UpdateUserAsync(user);
 
-            if (userToUpdate == null)
-            {
-                return NotFound();
-            }
+            if (updated)
+                return Ok(user);
 
-            _userService.Update(updatedUser);
-
-            return RedirectToRoute("api/v1/GetAllUsers");
+            return NotFound();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete(ApiRoutes.Users.DeleteUser)]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
-            var userToDelete = _userService.GetUserById(id);
+            var deleted = await _userService.DeleteUserAsync(id);
 
-            if (userToDelete == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(userToDelete);
+            if (deleted)
+                return NoContent();
+             
+            return NotFound();
         }
     }
 }

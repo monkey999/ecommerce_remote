@@ -27,11 +27,18 @@ namespace DataAccess
         {
             return _dbSet.Where(expression).AsNoTracking();
         }
+
         public void Dispose()
         {
             _context.Dispose();
         }
-        public async Task SaveAsync()
+
+        public async Task<int> SaveChangesAsyncWithResult()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
@@ -49,11 +56,6 @@ namespace DataAccess
         public void RemoveById(int id)
         {
             _dbSet.Remove(_dbSet.Find(id));
-        }
-
-        public void RemoveByEntity(T entity)
-        {
-            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)

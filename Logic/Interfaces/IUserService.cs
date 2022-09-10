@@ -6,9 +6,10 @@ namespace Logic.Services
 {
     public interface IUserService
     {
-        Task CreateUser(User user);
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> GetUserById(int id);
-        void Update(User user);
+        Task<bool> CreateUserAsync(User user);
+        Task<IEnumerable<User>> GetUsersAsync();
+        Task<User> GetUserByIdAsync(int id);
+        Task<bool> UpdateUserAsync(User user);
+        Task<bool> DeleteUserAsync(int userId);
     }
 }

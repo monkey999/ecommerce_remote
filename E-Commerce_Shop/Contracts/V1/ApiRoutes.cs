@@ -13,8 +13,10 @@ namespace E_Commerce_Shop.Contracts.V1
         public static class Users
         {
             public const string GetAllUsers = Base + "/users";
-            public const string AddUser = Base + "/users";
             public const string GetUserByID = Base + "/users/{userId}";
+            public const string AddUser = Base + "/users";
+            public const string DeleteUser = Base + "/users/{userId}";
+            public const string UpdateUser = Base + "/users";
         }
     }
 }

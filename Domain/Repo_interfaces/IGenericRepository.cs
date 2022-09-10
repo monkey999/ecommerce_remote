@@ -13,10 +13,10 @@ namespace DataAccess
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
         IQueryable<T> FindAll();
         void RemoveById(int id);
-        void RemoveByEntity(T entity);
         void RemoveRange(IEnumerable<T> entities);
         void Update(T entity);
-        Task SaveAsync();
+        Task<int> SaveChangesAsyncWithResult();
+        Task SaveChangesAsync();
         void Dispose();
     }
 }
