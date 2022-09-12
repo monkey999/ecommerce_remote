@@ -12,3 +12,4 @@ C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.dl
 C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\ref\A_Domain.dll
 C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.pdb
 C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.genruntimeconfig.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\Domain\obj\Debug\net5.0\A_Domain.csproj.AssemblyReference.cache

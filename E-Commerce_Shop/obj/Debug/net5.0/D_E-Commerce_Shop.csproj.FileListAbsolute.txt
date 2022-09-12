@@ -64,3 +64,5 @@ C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\re
 C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.pdb
 C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\obj\Debug\net5.0\D_E-Commerce_Shop.genruntimeconfig.cache
 C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\E-Commerce_Shop\bin\Debug\net5.0\NuGet.Versioning.dll

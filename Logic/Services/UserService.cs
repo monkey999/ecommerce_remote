@@ -14,7 +14,7 @@ namespace Logic.Services
     {
         private readonly IGenericRepository<User> _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IGenericRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -30,7 +30,7 @@ namespace Logic.Services
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             return await _userRepository.FindAll()
-                            .OrderBy(u => u.Name)
+                            .OrderBy(u => u.Id)
                                 .ToListAsync();
         }
 
@@ -50,6 +50,11 @@ namespace Logic.Services
 
         public async Task<bool> DeleteUserAsync(int userId)
         {
+            var user = await GetUserByIdAsync(userId);
+
+            if (user == null)
+                return false;
+
             _userRepository.RemoveById(userId);
             var deleted = await _userRepository.SaveChangesAsyncWithResult();
 

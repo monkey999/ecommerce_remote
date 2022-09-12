@@ -4,7 +4,6 @@ using E_Commerce_Shop.Contracts.V1.DTO_requests;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
@@ -29,10 +28,12 @@ namespace E_Commerce_Shop.Controllers.V1
         [HttpGet(ApiRoutes.Users.GetUserByID)]
         public async Task<IActionResult> GetUserById([FromRoute] int userId)
         {
-            if (await _userService.GetUserByIdAsync(userId) == null)
+            var user = await _userService.GetUserByIdAsync(userId);
+
+            if (user == null)
                 return NotFound();
 
-            return Ok(_userService.GetUserByIdAsync(userId));
+            return Ok(user);
         }
 
         [HttpPost(ApiRoutes.Users.AddUser)]
@@ -57,7 +58,6 @@ namespace E_Commerce_Shop.Controllers.V1
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUri = baseUrl + "/" + ApiRoutes.Users.GetUserByID.Replace("{userId}", response.Id.ToString());
             return Created(locationUri, response);
-            //return CreatedAtRoute("api/v1/GetUserById", new { id = dto.Id }, dto);
         }
 
         [HttpPut(ApiRoutes.Users.UpdateUser)]
@@ -82,13 +82,13 @@ namespace E_Commerce_Shop.Controllers.V1
         }
 
         [HttpDelete(ApiRoutes.Users.DeleteUser)]
-        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        public async Task<IActionResult> DeleteUser([FromRoute] int userId)
         {
-            var deleted = await _userService.DeleteUserAsync(id);
+            var deleted = await _userService.DeleteUserAsync(userId);
 
             if (deleted)
                 return NoContent();
-             
+
             return NotFound();
         }
     }

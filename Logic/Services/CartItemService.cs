@@ -9,18 +9,22 @@ namespace Logic.Services
 {
     public class CartItemService : ICartItemService
     {
+        private readonly IGenericRepository<CartItem> _cartItemRepository;
 
-        //private readonly IGenericRepository<CartItem> _cartItemRepository;
-        private readonly IUnitOfWork _uow;
-
-        public CartItemService(IUnitOfWork uow)
+        public CartItemService(IGenericRepository<CartItem> cartItemRepository)
         {
-            _uow = uow;
+            _cartItemRepository = cartItemRepository;
         }
 
-        public void CreateCartItem(CartItem cartItem) => _uow.CartItems.AddAsync(cartItem);
+        public void CreateCartItem(CartItem cartItem)
+        {
 
-        public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync() => await _uow.CartItems.GetAllCartItemsAsync();
+        }
+
+        public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync()
+        {
+
+        }
 
         public async Task<CartItem> GetByIdCartItemsAsync(int id)
         {
@@ -28,9 +32,9 @@ namespace Logic.Services
         }
 
         public async Task<IEnumerable<CartItem>> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression)
-        { 
-            return await _uow.CartItems.GetCartItemsByConditionAsync(expression); 
+        {
+            return await _uow.CartItems.GetCartItemsByConditionAsync(expression);
         }
-            
+
     }
 }
