@@ -4,6 +4,7 @@ using E_Commerce_Shop.Contracts.V1.DTO_requests;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
@@ -39,25 +40,20 @@ namespace E_Commerce_Shop.Controllers.V1
         [HttpPost(ApiRoutes.Users.AddUser)]
         public async Task<IActionResult> AddUser([FromBody] CreateUserRequestDTO request)
         {
-            var user = new User()
+            await _userService.CreateUserAsync(new User()
             {
                 Name = request.Name,
                 Surname = request.Surname,
                 PhoneNumber = request.PhoneNumber,
                 Email = request.Email,
                 Adress = request.Adress
-            };
-
-            await _userService.CreateUserAsync(user);
-
-            var response = new CreateUserResponseDTO()
-            {
-                Id = user.Id
-            };
+            });
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + ApiRoutes.Users.GetUserByID.Replace("{userId}", response.Id.ToString());
-            return Created(locationUri, response);
+            var locationUri = baseUrl + "/" + ApiRoutes.Users.GetUserByID
+                .Replace("{userId}", (await _userService.GetUsersAsync()).Last().Id.ToString());
+
+            return Created(locationUri, new CreateUserResponseDTO() { Id = (await _userService.GetUsersAsync()).Last().Id });
         }
 
         [HttpPut(ApiRoutes.Users.UpdateUser)]
