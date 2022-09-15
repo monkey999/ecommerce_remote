@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Contracts.V1.DTO_requests
 {
-    public class CreateOrderRequestDTO
+    public class UpdateOrderRequestDTO
     {
         public int CartItemId { get; set; }
         public int UserId { get; set; }

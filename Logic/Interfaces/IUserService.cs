@@ -8,7 +8,7 @@ namespace Logic.Services
     {
         Task<bool> CreateUserAsync(User user);
         Task<IEnumerable<User>> GetUsersAsync();
-        Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByIdAsync(int userId);
         Task<bool> UpdateUserAsync(User user);
         Task<bool> DeleteUserAsync(int userId);
     }

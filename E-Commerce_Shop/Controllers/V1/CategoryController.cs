@@ -1,14 +1,15 @@
-﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
+﻿using Domain;
+using E_Commerce_Shop.Contracts.V1;
+using E_Commerce_Shop.Contracts.V1.DTO_requests;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -19,42 +20,67 @@ namespace E_Commerce_Shop.Controllers.V1
             _categoryService = categoryService;
         }
 
-
-        // POST api/<CategoryController>
-        [HttpPost]
-        public void AddCategory([FromBody] CreateCategoryRequestDTO dto)
+        [HttpPost(ApiRoutes.Categories.AddCategory)]
+        public async Task<IActionResult> AddCategory([FromBody] CreateCategoryRequestDTO request)
         {
-            _categoryService.CreateCategory(new Domain.Category()
+            await _categoryService.CreateCategoryAsync(new Category()
             {
-                Name = dto.Name,
-                Description = dto.Description
+                Name = request.Name,
+                Description = request.Description
             });
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUri = baseUrl + "/" + ApiRoutes.Categories.GetCategoryByID.Replace("{categoryId}", (await _categoryService
+                .GetAllCategoriesAsync()).Last().ToString());
+
+            return Created(locationUri, new CreateCategoryResponseDTO() { Id = (await _categoryService.GetAllCategoriesAsync()).Last().Id });
+
         }
 
-        // GET: api/<CategoryController>
-        [HttpGet]
-        public IEnumerable<Domain.Category> GetAll() => _categoryService.GetCategories();
+        [HttpGet(ApiRoutes.Categories.GetAllCategories)]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            return Ok(await _categoryService.GetAllCategoriesAsync());
+        }
 
+        [HttpGet(ApiRoutes.Categories.GetCategoryByID)]
+        public async Task<IActionResult> GetCategoryById([FromRoute] int categoryId)
+        {
+            var category = await _categoryService.GetCategoryByIdAsync(categoryId);
 
-        // GET api/<CategoryController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+            if (category == null)
+                return NotFound();
 
+            return Ok(category);
+        }
 
+        [HttpPut(ApiRoutes.Categories.UpdateCategory)]
+        public async Task<IActionResult> UpdateCategory([FromRoute] int categoryId, [FromBody] UpdateCategoryRequestDTO request)
+        {
+            var category = new Category
+            {
+                Id = categoryId,
+                Name = request.Name,
+                Description = request.Description
+            };
 
-        //// PUT api/<CategoryController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+            var updated = await _categoryService.UpdateCategoryAsync(category);
 
-        //// DELETE api/<CategoryController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+            if (updated)
+                return Ok(category);
+
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Categories.DeleteCategory)]
+        public async Task<IActionResult> DeleteCategory([FromRoute] int categoryId)
+        {
+            var deleted = await _categoryService.DeleteCategoryAsync(categoryId);
+
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
+        }
     }
 }

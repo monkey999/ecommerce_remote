@@ -15,23 +15,5 @@ namespace DataAccess.Repositories
         {
 
         }
-
-        public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync()
-        {
-            return await FindAll().OrderBy(ci=>ci.Quantity).ToListAsync();
-        }
-
-        public async Task<CartItem> GetByIdCartItemsAsync(int id)
-        {
-            return await FindByCondition(ci => ci.Id.Equals(id))
-                .FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<CartItem>> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression)
-        {
-            return await FindByCondition(expression).ToListAsync();
-        }
-
-
     }
 }

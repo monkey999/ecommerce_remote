@@ -34,15 +34,16 @@ namespace Logic.Services
                                 .ToListAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _userRepository.FindByCondition(u => u.Id.Equals(id))
+            return await _userRepository.FindByCondition(u => u.Id.Equals(userId))
                             .SingleOrDefaultAsync();
         }
 
         public async Task<bool> UpdateUserAsync(User user)
         {
             _userRepository.Update(user);
+
             var updated = await _userRepository.SaveChangesAsyncWithResult();
 
             return updated > 0;
@@ -56,6 +57,7 @@ namespace Logic.Services
                 return false;
 
             _userRepository.RemoveById(userId);
+
             var deleted = await _userRepository.SaveChangesAsyncWithResult();
 
             return deleted > 0;

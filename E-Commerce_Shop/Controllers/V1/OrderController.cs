@@ -1,14 +1,16 @@
-﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
+﻿using Domain;
+using E_Commerce_Shop.Contracts.V1;
+using E_Commerce_Shop.Contracts.V1.DTO_requests;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -20,47 +22,80 @@ namespace E_Commerce_Shop.Controllers.V1
             _orderService = orderService;
         }
 
-
-        // GET: api/<OrderController>
-        [HttpGet]
-        public IEnumerable<Domain.Order> GetAll() => _orderService.GetOrders();
-
-        // POST api/<OrderController>
-        [HttpPost]
-        public void AddOrder([FromBody] CreateOrderRequestDTO dto)
+        [HttpGet(ApiRoutes.Orders.GetAllOrders)]
+        public async Task<IActionResult> GetAllOrders()
         {
-            _orderService.CreateOrder(new Domain.Order()
-            {
-                CartItemId = dto.CartItemId,
-                UserId = dto.UserId,
-                Address1 = dto.Address1,
-                Address2 = dto.Address2,
-                City = dto.City,
-                Country = dto.Country,
-                PostalCode = dto.PostalCode,
-                GiftWrap = dto.GiftWrap,
-                Dispatched = dto.Dispatched
-            });
+            return Ok(await _orderService.GetOrdersAsync());
         }
 
-        // PUT api/<OrderController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpGet(ApiRoutes.Orders.GetOrderByID)]
+        public async Task<IActionResult> GetOrderById([FromRoute] int orderId)
+        {
+            var order = await _orderService.GetOrderByIdAsync(orderId);
 
-        // DELETE api/<OrderController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+            if (order == null)
+                return NotFound();
 
+            return Ok(order);
+        }
 
-        // GET api/<OrderController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpPost(ApiRoutes.Orders.AddOrder)]
+        public async Task<IActionResult> AddUser([FromBody] CreateOrderRequestDTO request)
+        {
+            await _orderService.CreateOrderAsync(new Order()
+            {
+                CartItemId = request.CartItemId,
+                UserId = request.UserId,
+                Address1 = request.Address1,
+                Address2 = request.Address2,
+                City = request.City,
+                Country = request.Country,
+                PostalCode = request.PostalCode,
+                GiftWrap = request.GiftWrap,
+                Dispatched = request.Dispatched
+            });
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUri = baseUrl + "/" + ApiRoutes.Orders.GetOrderByID
+                .Replace("{orderId}", (await _orderService.GetOrdersAsync()).Last().Id.ToString());
+
+            return Created(locationUri, new CreateOrderResponseDTO() { Id = (await _orderService.GetOrdersAsync()).Last().Id });
+        }
+
+        [HttpPut(ApiRoutes.Orders.UpdateOrder)]
+        public async Task<IActionResult> UpdateUser([FromRoute] int orderId, [FromBody] UpdateOrderRequestDTO request)
+        {
+            var order = new Order
+            {
+                Id = orderId,
+                CartItemId = request.CartItemId,
+                UserId = request.UserId,
+                Address1 = request.Address1,
+                Address2 = request.Address2,
+                City = request.City,
+                Country = request.Country,
+                PostalCode = request.PostalCode,
+                GiftWrap = request.GiftWrap,
+                Dispatched = request.Dispatched
+            };
+
+            var updated = await _orderService.UpdateOrderAsync(order);
+
+            if (updated)
+                return Ok(order);
+
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Orders.DeleteOrder)]
+        public async Task<IActionResult> DeleteUser([FromRoute] int orderId)
+        {
+            var deleted = await _orderService.DeleteOrderAsync(orderId);
+
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
+        }
     }
 }
