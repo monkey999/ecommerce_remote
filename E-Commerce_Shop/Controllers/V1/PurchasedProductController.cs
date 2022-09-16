@@ -1,4 +1,4 @@
-﻿using E_Commerce_Shop.Contracts.V1.DTO_requests;
+﻿using E_Commerce_Shop.Contracts.V1.DTO_requests.CREATE;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;

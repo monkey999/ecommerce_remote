@@ -1,10 +1,10 @@
 ﻿using Domain;
 using E_Commerce_Shop.Contracts.V1;
 using E_Commerce_Shop.Contracts.V1.DTO_requests;
+using E_Commerce_Shop.Contracts.V1.DTO_requests.CREATE;
 using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +14,8 @@ namespace E_Commerce_Shop.Controllers.V1
     [ApiController]
     public class OrderController : ControllerBase
     {
-
         private readonly IOrderService _orderService;
-
+            
         public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
