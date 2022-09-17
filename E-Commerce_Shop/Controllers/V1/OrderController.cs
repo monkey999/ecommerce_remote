@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
 {
-    [Route("api/orders")]
+    [Route("api/order")]
     [ApiController]
     public class OrderController : ControllerBase
     {

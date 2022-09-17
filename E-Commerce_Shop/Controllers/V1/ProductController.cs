@@ -1,14 +1,16 @@
-﻿using E_Commerce_Shop.Contracts.V1.DTO_requests.CREATE;
+﻿using Domain;
+using E_Commerce_Shop.Contracts.V1;
+using E_Commerce_Shop.Contracts.V1.DTO_requests.CREATE;
+using E_Commerce_Shop.Contracts.V1.DTO_requests.UPDATE;
+using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace E_Commerce_Shop.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/product")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -19,44 +21,73 @@ namespace E_Commerce_Shop.Controllers.V1
             _productService = productService;
         }
 
-        // GET: api/<ProductController>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Domain.Product>>> GetAll() => Ok(await _productService.GetProducts());
-
-        // POST api/<ProductController>
-        [HttpPost]
-        public void AddProduct([FromBody] CreateProductRequestDTO dto)
+        [HttpGet(ApiRoutes.Products.GetAllProducts)]
+        public async Task<IActionResult> GetAllProducts()
         {
-            _productService.CreateProduct(new Domain.Product()
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-                CategoryId = dto.CategoryId,
-                Price = dto.Price,
-                AvailableItems = dto.AvailableItems
-            });
-
+            return Ok(await _productService.GetProductsAsync());
         }
 
-        // GET api/<ProductController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet(ApiRoutes.Products.GetProductByID)]
+        public async Task<IActionResult> GetProductById([FromRoute] int productId)
+        {
+            var product = await _productService.GetProductByIdAsync(productId);
 
+            if (product == null)
+                return NotFound();
 
+            return Ok(product);
+        }
 
-        // PUT api/<ProductController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPost(ApiRoutes.Products.AddProduct)]
+        public async Task<IActionResult> AddProduct([FromBody] CreateProductRequestDTO request)
+        {
+            await _productService.CreateProductAsync(new Product()
+            {
+                Name = request.Name,
+                Description = request.Description,
+                CategoryId = request.CategoryId,
+                Price = request.Price,
+                AvailableItems = request.AvailableItems
+            });
 
-        //// DELETE api/<ProductController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUri = baseUrl + "/" + ApiRoutes.Products.GetProductByID
+                .Replace("{productId}", (await _productService.GetProductsAsync()).Last().Id.ToString());
+
+            return Created(locationUri, new CreateProductResponseDTO() { Id = (await _productService.GetProductsAsync()).Last().Id });
+        }
+
+        [HttpPut(ApiRoutes.Products.UpdateProduct)]
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] UpdateProductRequestDTO request)
+        {
+            var product = new Product
+            {
+                Id = productId,
+                Name = request.Name,
+                Description = request.Description,
+                CategoryId = request.CategoryId,
+                Price = request.Price,
+                AvailableItems = request.AvailableItems
+            };
+
+            var updated = await _productService.UpdateProductAsync(product);
+
+            if (updated)
+                return Ok(product);
+
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Products.DeleteProduct)]
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
+        {
+            var deleted = await _productService.DeleteProductAsync(productId);
+
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
+        }
     }
 }
+

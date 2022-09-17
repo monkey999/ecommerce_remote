@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce_Shop.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/cartItem")]
     [ApiController]
     public class CartItemController : ControllerBase
     {
