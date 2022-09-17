@@ -55,7 +55,13 @@ namespace E_Commerce_Shop.Controllers.V1
             var locationUri = baseUrl + "/" + ApiRoutes.CartItems.GetCartItemById.Replace("{cartItemId}",
                 (await _cartItemService.GetAllCartItemsAsync()).Last().Id.ToString());
 
-            return Created(locationUri, new CreateCartItemResponseDTO() { Id = (await _cartItemService.GetAllCartItemsAsync()).Last().Id });
+            return Created(locationUri, new CreateCartItemResponseDTO()
+            {
+                Id = (await _cartItemService.GetAllCartItemsAsync())
+                        .Last().Id,
+                DateCreated = (await _cartItemService.GetAllCartItemsAsync())
+                        .Last().DateCreated
+            });
         }
 
         [HttpDelete(ApiRoutes.CartItems.DeleteCartItem)]

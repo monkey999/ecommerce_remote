@@ -6,7 +6,6 @@ using E_Commerce_Shop.Contracts.V1.DTO_responses;
 using Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,8 +52,12 @@ namespace E_Commerce_Shop.Controllers.V1
             var locationUri = baseUrl + "/" + ApiRoutes.PurchasedProducts.GetPurchasedProductByID
                 .Replace("{purchasedProductId}", (await _purchasedProductService.GetPurchasedProductsAsync()).Last().Id.ToString());
 
-            return Created(locationUri, new CreatePurchasedProductResponseDTO() { Id = (await _purchasedProductService
-                .GetPurchasedProductsAsync()).Last().Id });
+            return Created(locationUri, new CreatePurchasedProductResponseDTO()
+            {
+                Id = (await _purchasedProductService
+                        .GetPurchasedProductsAsync()).Last().Id,
+                DatePurchased = (await _purchasedProductService.GetPurchasedProductsAsync()).Last().DatePurchased
+            });
         }
 
         [HttpPut(ApiRoutes.Users.UpdateUser)]

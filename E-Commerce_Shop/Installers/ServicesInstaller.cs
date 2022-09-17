@@ -22,7 +22,7 @@ namespace E_Commerce_Shop.Installers
             services.AddTransient<IPurchasedProductsRepository, PurchasedProductsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 
-            //services.AddTransient<ICartItemService, CartItemService>();
+            services.AddTransient<ICartItemService, CartItemService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductService, ProductService>();
