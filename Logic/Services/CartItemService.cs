@@ -1,7 +1,9 @@
 ﻿using DataAccess;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -9,29 +11,50 @@ namespace Logic.Services
 {
     public class CartItemService : ICartItemService
     {
+        private readonly IGenericRepository<CartItem> _cartItemRepository;
 
-        //private readonly IGenericRepository<CartItem> _cartItemRepository;
-        private readonly IUnitOfWork _uow;
-
-        public CartItemService(IUnitOfWork uow)
+        public CartItemService(IGenericRepository<CartItem> cartItemRepository)
         {
-            _uow = uow;
+            _cartItemRepository = cartItemRepository;
         }
 
-        public void CreateCartItem(CartItem cartItem) => _uow.CartItems.Add(cartItem);
-
-        public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync() => await _uow.CartItems.GetAllCartItemsAsync();
-
-        public async Task<CartItem> GetByIdCartItemsAsync(int id)
+        public async Task<bool> CreateCartItem(CartItem cartItem)
         {
-            return await _uow.CartItems.GetByIdCartItemsAsync(id);
+            await _cartItemRepository.AddAsync(cartItem);
+            var created = await _cartItemRepository.SaveChangesAsyncWithResult();
+
+            return created > 0;
         }
 
-        public async Task<IEnumerable<CartItem>> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression)
-        { 
-            return await _uow.CartItems.GetCartItemsByConditionAsync(expression); 
+        public async Task<CartItem> GetCartItemByIdAsync(int cartItemId)
+        {
+            return await _cartItemRepository.FindByCondition(x => x.Id.Equals(cartItemId)).SingleOrDefaultAsync();
         }
-            
-        public async Task Save
+
+        public async Task<IEnumerable<CartItem>> GetAllCartItemsAsync()
+        {
+            return await _cartItemRepository.FindAll().OrderBy(x => x.Id).ToListAsync();
+        }
+
+        public async Task<bool> UpdateCartItemAsync(CartItem cartItem)
+        {
+            _cartItemRepository.Update(cartItem);
+            var updated = await _cartItemRepository.SaveChangesAsyncWithResult();
+
+            return updated > 0;
+        }
+
+        public async Task<bool> DeleteCartItemAsync(int cartItemId)
+        {
+            var user = await GetCartItemByIdAsync(cartItemId);
+
+            if (user == null)
+                return false;
+
+            _cartItemRepository.RemoveById(cartItemId);
+            var deleted = await _cartItemRepository.SaveChangesAsyncWithResult();
+
+            return deleted > 0;
+        }
     }
 }

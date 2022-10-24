@@ -3,3 +3,16 @@ C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataA
 C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.AssemblyInfoInputs.cache
 C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.AssemblyInfo.cs
 C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\B_DataAccess.deps.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\B_DataAccess.runtimeconfig.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\B_DataAccess.runtimeconfig.dev.json
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\B_DataAccess.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\ref\B_DataAccess.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\B_DataAccess.pdb
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\A_Domain.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\bin\Debug\net5.0\A_Domain.pdb
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.csproj.CopyComplete
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\ref\B_DataAccess.dll
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.pdb
+C:\Users\Andrey\source\repos\E-Commerce_Shop\DataAccess\obj\Debug\net5.0\B_DataAccess.genruntimeconfig.cache

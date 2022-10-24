@@ -25,7 +25,13 @@ namespace DataAccess
         public IProductRepository Products { get; private set; }
         public IPurchasedProductsRepository PurchasedProducts { get; private set; }
         public IUserRepository Users { get; private set; }
-        public async Task SaveAsync() => await _context.SaveChangesAsync();
-        public void Dispose() => _context.Dispose();
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
     }
 }

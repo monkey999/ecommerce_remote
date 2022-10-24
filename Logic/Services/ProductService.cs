@@ -1,6 +1,8 @@
 ﻿using DataAccess;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Logic.Services
@@ -13,14 +15,48 @@ namespace Logic.Services
         {
             _productRepository = productRepository;
         }
-
-        public void CreateProduct(Product product) => _productRepository.Add(product);
-
-        public IEnumerable<Product> GetProducts() => _productRepository.FindAll();
-
-        Task<IEnumerable<Product>> IProductService.GetProducts()
+        public async Task<bool> CreateProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            await _productRepository.AddAsync(product);
+            var created = await _productRepository.SaveChangesAsyncWithResult();
+
+            return created > 0;
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsAsync()
+        {
+            return await _productRepository.FindAll()
+                            .OrderBy(u => u.Id)
+                                .ToListAsync();
+        }
+
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            return await _productRepository.FindByCondition(u => u.Id.Equals(productId))
+                            .SingleOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateProductAsync(Product product)
+        {
+            _productRepository.Update(product);
+
+            var updated = await _productRepository.SaveChangesAsyncWithResult();
+
+            return updated > 0;
+        }
+
+        public async Task<bool> DeleteProductAsync(int productId)
+        {
+            var product = await GetProductByIdAsync(productId);
+
+            if (product == null)
+                return false;
+
+            _productRepository.RemoveById(productId);
+
+            var deleted = await _productRepository.SaveChangesAsyncWithResult();
+
+            return deleted > 0;
         }
     }
 }

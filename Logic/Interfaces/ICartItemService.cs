@@ -1,18 +1,15 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Logic.Services
 {
     public interface ICartItemService
     {
-        void CreateCartItem(CartItem cartItem);
+        Task<bool> CreateCartItem(CartItem cartItem);
+        Task<CartItem> GetCartItemByIdAsync(int cartItemId);
         Task<IEnumerable<CartItem>> GetAllCartItemsAsync();
-        Task<CartItem> GetByIdCartItemsAsync(int id);
-        Task<IEnumerable<CartItem>> GetCartItemsByConditionAsync(Expression<Func<CartItem, bool>> expression);
-        Task SaveAsync();
+        Task<bool> UpdateCartItemAsync(CartItem cartItem);
+        Task<bool> DeleteCartItemAsync(int cartItemId);
     }
 }
