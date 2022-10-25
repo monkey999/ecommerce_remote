@@ -1,7 +1,5 @@
-﻿using System;
-using Domain;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -127,7 +125,7 @@ namespace DataAccess
                 entity.HasOne(d => d.CartItem)
                     .WithMany(p => p.PurchasedProducts)
                     .HasForeignKey(d => d.CartItemId)
-                    .HasConstraintName("FK_PurchasedProducts_CartItem");
+                    .HasConstraintName("FK_PurchasedProduct_CartItem");
             });
 
             modelBuilder.Entity<User>(entity =>
